@@ -469,51 +469,74 @@ async function showForm(id) {
       <div class="section">Dimensões do motor (cm)</div>
 
       <div class="dim-diagram">
-        <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" class="dim-svg">
-          <!-- Sombra do corpo -->
-          <rect x="54" y="44" width="148" height="76" rx="6" fill="rgba(0,0,0,0.06)"/>
-          <!-- Corpo principal do motor -->
-          <rect x="50" y="40" width="148" height="76" rx="8" fill="#e4e8ef" stroke="#6b7589" stroke-width="2"/>
-          <!-- Tampa frontal -->
-          <rect x="50" y="52" width="14" height="52" rx="4" fill="#d4dae5" stroke="#6b7589" stroke-width="1.5"/>
-          <!-- Tampa traseira -->
-          <rect x="184" y="52" width="14" height="52" rx="4" fill="#d4dae5" stroke="#6b7589" stroke-width="1.5"/>
-          <!-- Eixo -->
-          <rect x="24" y="73" width="26" height="10" rx="3" fill="#9ca3af" stroke="#6b7589" stroke-width="1.5"/>
-          <!-- Caixa de ligação (terminal box) -->
-          <rect x="104" y="28" width="40" height="18" rx="4" fill="#d4dae5" stroke="#6b7589" stroke-width="1.5"/>
-          <!-- Aletas do dissipador -->
-          <line x1="80"  y1="40" x2="80"  y2="116" stroke="#9ca3af" stroke-width="1"/>
-          <line x1="97"  y1="40" x2="97"  y2="116" stroke="#9ca3af" stroke-width="1"/>
-          <line x1="114" y1="40" x2="114" y2="116" stroke="#9ca3af" stroke-width="1"/>
-          <line x1="131" y1="40" x2="131" y2="116" stroke="#9ca3af" stroke-width="1"/>
-          <line x1="148" y1="40" x2="148" y2="116" stroke="#9ca3af" stroke-width="1"/>
-          <line x1="165" y1="40" x2="165" y2="116" stroke="#9ca3af" stroke-width="1"/>
-          <!-- ── Cota COMPRIMENTO (C) ── -->
-          <line x1="24" y1="128" x2="198" y2="128" stroke="#1a5fd4" stroke-width="1.5" stroke-dasharray="4,2"/>
-          <line x1="24" y1="124" x2="24" y2="132" stroke="#1a5fd4" stroke-width="2"/>
-          <line x1="198" y1="124" x2="198" y2="132" stroke="#1a5fd4" stroke-width="2"/>
-          <text x="111" y="143" text-anchor="middle" font-size="11" font-weight="700" fill="#1a5fd4" font-family="IBM Plex Sans,sans-serif">C — Comprimento</text>
-          <!-- ── Cota LARGURA (L) ── -->
-          <line x1="212" y1="40" x2="212" y2="116" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,2"/>
-          <line x1="208" y1="40" x2="216" y2="40" stroke="#d97706" stroke-width="2"/>
-          <line x1="208" y1="116" x2="216" y2="116" stroke="#d97706" stroke-width="2"/>
-          <text x="236" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#d97706" font-family="IBM Plex Sans,sans-serif" transform="rotate(90,236,82)">L — Largura</text>
-          <!-- ── Cota ALTURA (A) ── -->
-          <line x1="232" y1="116" x2="232" y2="155" stroke="#166534" stroke-width="1.5" stroke-dasharray="4,2"/>
-          <line x1="228" y1="116" x2="237" y2="116" stroke="#166534" stroke-width="1.5"/>
-          <!-- linha chão -->
-          <line x1="50" y1="155" x2="240" y2="155" stroke="#6b7589" stroke-width="1.5" stroke-dasharray="3,2"/>
-          <line x1="228" y1="151" x2="236" y2="159" stroke="#166534" stroke-width="2"/>
-          <line x1="236" y1="151" x2="228" y2="159" stroke="#166534" stroke-width="2"/>
-          <text x="245" y="140" text-anchor="start" font-size="11" font-weight="700" fill="#166534" font-family="IBM Plex Sans,sans-serif">P</text>
-          <text x="246" y="153" text-anchor="start" font-size="9" fill="#166534" font-family="IBM Plex Sans,sans-serif">Prof.</text>
+        <svg viewBox="0 0 300 175" xmlns="http://www.w3.org/2000/svg" class="dim-svg">
+          <!--
+            Caixa isométrica fiel à imagem de referência:
+            L = Largura  → aresta superior (esquerda–direita, topo)
+            A = Altura   → aresta lateral direita (topo–base)
+            C = Comprimento → aresta inferior frontal (esquerda–direita, base)
+            Vértices da caixa (projeção oblíqua):
+              Frente-topo-esq  (FTE): 40, 55
+              Frente-topo-dir  (FTD): 175, 55
+              Frente-base-esq  (FBE): 40, 130
+              Frente-base-dir  (FBD): 175, 130
+              Fundo-topo-esq   (RTE): 70, 28
+              Fundo-topo-dir   (RTD): 205, 28
+              Fundo-base-dir   (RBD): 205, 103
+          -->
+          <!-- Face frontal -->
+          <polygon points="40,55 175,55 175,130 40,130" fill="#dde3ec" stroke="#5a6378" stroke-width="1.8"/>
+          <!-- Face superior -->
+          <polygon points="40,55 70,28 205,28 175,55" fill="#eaecf2" stroke="#5a6378" stroke-width="1.8"/>
+          <!-- Face lateral direita -->
+          <polygon points="175,55 205,28 205,103 175,130" fill="#c8cfe0" stroke="#5a6378" stroke-width="1.8"/>
+          <!-- Arestas ocultas tracejadas -->
+          <line x1="40" y1="130" x2="70" y2="103" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="70" y1="28" x2="70" y2="103" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="70" y1="103" x2="205" y2="103" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4,3"/>
+
+          <!-- ── Cota L — Largura (topo, esquerda→direita, igual à imagem) ── -->
+          <!-- linha de cota acima do topo -->
+          <line x1="40" y1="18" x2="205" y2="18" stroke="#d97706" stroke-width="1.8"/>
+          <!-- terminações em X (estilo da imagem) -->
+          <line x1="36" y1="14" x2="44" y2="22" stroke="#d97706" stroke-width="2"/>
+          <line x1="44" y1="14" x2="36" y2="22" stroke="#d97706" stroke-width="2"/>
+          <line x1="201" y1="14" x2="209" y2="22" stroke="#d97706" stroke-width="2"/>
+          <line x1="209" y1="14" x2="201" y2="22" stroke="#d97706" stroke-width="2"/>
+          <!-- linhas de chamada -->
+          <line x1="40" y1="18" x2="40" y2="28" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="205" y1="18" x2="205" y2="28" stroke="#d97706" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="122" y="13" text-anchor="middle" font-size="12" font-weight="700" fill="#d97706" font-family="IBM Plex Sans,sans-serif">L</text>
+
+          <!-- ── Cota A — Altura (lateral direita, topo→base, igual à imagem) ── -->
+          <line x1="220" y1="28" x2="220" y2="130" stroke="#166534" stroke-width="1.8"/>
+          <!-- terminações em X -->
+          <line x1="216" y1="24" x2="224" y2="32" stroke="#166534" stroke-width="2"/>
+          <line x1="224" y1="24" x2="216" y2="32" stroke="#166534" stroke-width="2"/>
+          <line x1="216" y1="126" x2="224" y2="134" stroke="#166534" stroke-width="2"/>
+          <line x1="224" y1="126" x2="216" y2="134" stroke="#166534" stroke-width="2"/>
+          <!-- linhas de chamada -->
+          <line x1="205" y1="28" x2="220" y2="28" stroke="#166534" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="175" y1="130" x2="220" y2="130" stroke="#166534" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="232" y="84" text-anchor="start" font-size="12" font-weight="700" fill="#166534" font-family="IBM Plex Sans,sans-serif">A</text>
+
+          <!-- ── Cota C — Comprimento (base frontal, esquerda→direita, igual à imagem) ── -->
+          <line x1="40" y1="148" x2="175" y2="148" stroke="#1a5fd4" stroke-width="1.8"/>
+          <!-- terminações em X -->
+          <line x1="36" y1="144" x2="44" y2="152" stroke="#1a5fd4" stroke-width="2"/>
+          <line x1="44" y1="144" x2="36" y2="152" stroke="#1a5fd4" stroke-width="2"/>
+          <line x1="171" y1="144" x2="179" y2="152" stroke="#1a5fd4" stroke-width="2"/>
+          <line x1="179" y1="144" x2="171" y2="152" stroke="#1a5fd4" stroke-width="2"/>
+          <!-- linhas de chamada -->
+          <line x1="40" y1="130" x2="40" y2="148" stroke="#1a5fd4" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="175" y1="130" x2="175" y2="148" stroke="#1a5fd4" stroke-width="1" stroke-dasharray="3,2"/>
+          <text x="107" y="163" text-anchor="middle" font-size="12" font-weight="700" fill="#1a5fd4" font-family="IBM Plex Sans,sans-serif">C</text>
         </svg>
       </div>
 
       <div class="row3">
         <div class="field">
-          <label class="dim-label dim-a">P — Profundidade (cm)</label>
+          <label class="dim-label dim-a">A — Altura (cm)</label>
           <input id="f-alt" type="number" placeholder="0" value="${esc(r?.dim_alt)}" step="0.1" min="0" inputmode="decimal" />
         </div>
         <div class="field">
@@ -668,7 +691,7 @@ async function gerarZip(){
     const cabecalho=['TAG','EX','Tipo','Área','Localização','Potência','Unidade',
       'Tensão (V)','Ligação','Corrente (A)','RPM','FP','IP','Classe','Freq (Hz)',
       'Fabricante','Nº Série','Modelo','Status','Serviços (checks)',
-      'Anotações','Profundidade (cm)','Largura (cm)','Comprimento (cm)','Qtd Fotos','Criado em','Atualizado em'];
+      'Anotações','Altura (cm)','Largura (cm)','Comprimento (cm)','Qtd Fotos','Criado em','Atualizado em'];
     const campos=['tag','ex','tipo','area','localizacao','potencia','unidade_pot',
       'tensao','ligacao','corrente','rpm','fp','ip','classe','freq',
       'fabricante','serie','modelo','status','servicos_nomes',
