@@ -506,14 +506,14 @@ async function showForm(id) {
           <line x1="50" y1="155" x2="240" y2="155" stroke="#6b7589" stroke-width="1.5" stroke-dasharray="3,2"/>
           <line x1="228" y1="151" x2="236" y2="159" stroke="#166534" stroke-width="2"/>
           <line x1="236" y1="151" x2="228" y2="159" stroke="#166534" stroke-width="2"/>
-          <text x="245" y="140" text-anchor="start" font-size="11" font-weight="700" fill="#166534" font-family="IBM Plex Sans,sans-serif">A</text>
-          <text x="246" y="153" text-anchor="start" font-size="9" fill="#166534" font-family="IBM Plex Sans,sans-serif">Alt.</text>
+          <text x="245" y="140" text-anchor="start" font-size="11" font-weight="700" fill="#166534" font-family="IBM Plex Sans,sans-serif">P</text>
+          <text x="246" y="153" text-anchor="start" font-size="9" fill="#166534" font-family="IBM Plex Sans,sans-serif">Prof.</text>
         </svg>
       </div>
 
       <div class="row3">
         <div class="field">
-          <label class="dim-label dim-a">A — Altura (cm)</label>
+          <label class="dim-label dim-a">P — Profundidade (cm)</label>
           <input id="f-alt" type="number" placeholder="0" value="${esc(r?.dim_alt)}" step="0.1" min="0" inputmode="decimal" />
         </div>
         <div class="field">
@@ -668,7 +668,7 @@ async function gerarZip(){
     const cabecalho=['TAG','EX','Tipo','Área','Localização','Potência','Unidade',
       'Tensão (V)','Ligação','Corrente (A)','RPM','FP','IP','Classe','Freq (Hz)',
       'Fabricante','Nº Série','Modelo','Status','Serviços (checks)',
-      'Anotações','Altura (cm)','Largura (cm)','Comprimento (cm)','Qtd Fotos','Criado em','Atualizado em'];
+      'Anotações','Profundidade (cm)','Largura (cm)','Comprimento (cm)','Qtd Fotos','Criado em','Atualizado em'];
     const campos=['tag','ex','tipo','area','localizacao','potencia','unidade_pot',
       'tensao','ligacao','corrente','rpm','fp','ip','classe','freq',
       'fabricante','serie','modelo','status','servicos_nomes',
