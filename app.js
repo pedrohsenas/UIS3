@@ -466,6 +466,66 @@ async function showForm(id) {
         <textarea id="f-obs" rows="3" placeholder="Detalhes adicionais sobre os serviços...">${esc(r?.obs)}</textarea>
       </div>
 
+      <div class="section">Dimensões do motor (cm)</div>
+
+      <div class="dim-diagram">
+        <svg viewBox="0 0 280 160" xmlns="http://www.w3.org/2000/svg" class="dim-svg">
+          <!-- Sombra do corpo -->
+          <rect x="54" y="44" width="148" height="76" rx="6" fill="rgba(0,0,0,0.06)"/>
+          <!-- Corpo principal do motor -->
+          <rect x="50" y="40" width="148" height="76" rx="8" fill="#e4e8ef" stroke="#6b7589" stroke-width="2"/>
+          <!-- Tampa frontal -->
+          <rect x="50" y="52" width="14" height="52" rx="4" fill="#d4dae5" stroke="#6b7589" stroke-width="1.5"/>
+          <!-- Tampa traseira -->
+          <rect x="184" y="52" width="14" height="52" rx="4" fill="#d4dae5" stroke="#6b7589" stroke-width="1.5"/>
+          <!-- Eixo -->
+          <rect x="24" y="73" width="26" height="10" rx="3" fill="#9ca3af" stroke="#6b7589" stroke-width="1.5"/>
+          <!-- Caixa de ligação (terminal box) -->
+          <rect x="104" y="28" width="40" height="18" rx="4" fill="#d4dae5" stroke="#6b7589" stroke-width="1.5"/>
+          <!-- Aletas do dissipador -->
+          <line x1="80"  y1="40" x2="80"  y2="116" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="97"  y1="40" x2="97"  y2="116" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="114" y1="40" x2="114" y2="116" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="131" y1="40" x2="131" y2="116" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="148" y1="40" x2="148" y2="116" stroke="#9ca3af" stroke-width="1"/>
+          <line x1="165" y1="40" x2="165" y2="116" stroke="#9ca3af" stroke-width="1"/>
+          <!-- ── Cota COMPRIMENTO (C) ── -->
+          <line x1="24" y1="128" x2="198" y2="128" stroke="#1a5fd4" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="24" y1="124" x2="24" y2="132" stroke="#1a5fd4" stroke-width="2"/>
+          <line x1="198" y1="124" x2="198" y2="132" stroke="#1a5fd4" stroke-width="2"/>
+          <text x="111" y="143" text-anchor="middle" font-size="11" font-weight="700" fill="#1a5fd4" font-family="IBM Plex Sans,sans-serif">C — Comprimento</text>
+          <!-- ── Cota LARGURA (L) ── -->
+          <line x1="212" y1="40" x2="212" y2="116" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="208" y1="40" x2="216" y2="40" stroke="#d97706" stroke-width="2"/>
+          <line x1="208" y1="116" x2="216" y2="116" stroke="#d97706" stroke-width="2"/>
+          <text x="236" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#d97706" font-family="IBM Plex Sans,sans-serif" transform="rotate(90,236,82)">L — Largura</text>
+          <!-- ── Cota ALTURA (A) ── -->
+          <line x1="232" y1="116" x2="232" y2="155" stroke="#166534" stroke-width="1.5" stroke-dasharray="4,2"/>
+          <line x1="228" y1="116" x2="237" y2="116" stroke="#166534" stroke-width="1.5"/>
+          <!-- linha chão -->
+          <line x1="50" y1="155" x2="240" y2="155" stroke="#6b7589" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <line x1="228" y1="151" x2="236" y2="159" stroke="#166534" stroke-width="2"/>
+          <line x1="236" y1="151" x2="228" y2="159" stroke="#166534" stroke-width="2"/>
+          <text x="245" y="140" text-anchor="start" font-size="11" font-weight="700" fill="#166534" font-family="IBM Plex Sans,sans-serif">A</text>
+          <text x="246" y="153" text-anchor="start" font-size="9" fill="#166534" font-family="IBM Plex Sans,sans-serif">Alt.</text>
+        </svg>
+      </div>
+
+      <div class="row3">
+        <div class="field">
+          <label class="dim-label dim-a">A — Altura (cm)</label>
+          <input id="f-alt" type="number" placeholder="0" value="${esc(r?.dim_alt)}" step="0.1" min="0" inputmode="decimal" />
+        </div>
+        <div class="field">
+          <label class="dim-label dim-l">L — Largura (cm)</label>
+          <input id="f-lar" type="number" placeholder="0" value="${esc(r?.dim_lar)}" step="0.1" min="0" inputmode="decimal" />
+        </div>
+        <div class="field">
+          <label class="dim-label dim-c">C — Comprimento (cm)</label>
+          <input id="f-comp" type="number" placeholder="0" value="${esc(r?.dim_comp)}" step="0.1" min="0" inputmode="decimal" />
+        </div>
+      </div>
+
       <div class="section">Fotos</div>
       <div class="foto-grid" id="foto-grid">${renderFotos()}</div>
       <label class="add-foto-btn" id="add-foto-label">
@@ -571,6 +631,9 @@ async function salvar() {
     servicos_check:checkeds,
     servicos_nomes:checkeds.map(i=>SERVICOS_LISTA[i]).join('; '),
     obs:        document.getElementById('f-obs').value.trim(),
+    dim_alt:    document.getElementById('f-alt').value,
+    dim_lar:    document.getElementById('f-lar').value,
+    dim_comp:   document.getElementById('f-comp').value,
     qtd_fotos:  fotos.length,
     createdAt:  editingId?(registros.find(r=>r.id===editingId)?.createdAt||agora):agora,
     updatedAt:  agora
@@ -605,11 +668,11 @@ async function gerarZip(){
     const cabecalho=['TAG','EX','Tipo','Área','Localização','Potência','Unidade',
       'Tensão (V)','Ligação','Corrente (A)','RPM','FP','IP','Classe','Freq (Hz)',
       'Fabricante','Nº Série','Modelo','Status','Serviços (checks)',
-      'Anotações','Qtd Fotos','Criado em','Atualizado em'];
+      'Anotações','Altura (cm)','Largura (cm)','Comprimento (cm)','Qtd Fotos','Criado em','Atualizado em'];
     const campos=['tag','ex','tipo','area','localizacao','potencia','unidade_pot',
       'tensao','ligacao','corrente','rpm','fp','ip','classe','freq',
       'fabricante','serie','modelo','status','servicos_nomes',
-      'obs','qtd_fotos','createdAt','updatedAt'];
+      'obs','dim_alt','dim_lar','dim_comp','qtd_fotos','createdAt','updatedAt'];
     const linhas=registros.map(r=>
       campos.map(c=>{
         const v=c==='ex'?(r[c]?'SIM':'NÃO'):(r[c]??'');
